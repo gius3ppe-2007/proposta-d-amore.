@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposta speciale</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #fef3f7;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .button {
+      padding: 20px 40px;
+      font-size: 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+    }
+    .button.no {
+      background-color: #f44336;
+    }
+    .hearts, .flowers {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .hearts img, .flowers img {
+      position: absolute;
+      animation: float 10s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-200px); }
+      100% { transform: translateY(0); }
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Alessia Caiazza, nata il 13 gennaio 2007, vuoi essere la mia Valentina quest’anno e per tutta la vita?</h1>
+  
+  <button class="button yes">SI</button>
+  <button class="button no">NO</button>
+
+  <div class="hearts">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Red_heart_icon.svg/1200px-Red_heart_icon.svg.png" width="50" style="top: 10%; left: 20%">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Red_heart_icon.svg/1200px-Red_heart_icon.svg.png" width="50" style="top: 60%; left: 50%">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Red_heart_icon.svg/1200px-Red_heart_icon.svg.png" width="50" style="top: 30%; left: 80%">
+  </div>
+
+  <div class="flowers hidden">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Rose_flower_icon.svg" width="40" style="top: 10%; left: 50%">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Rose_flower_icon.svg" width="40" style="top: 70%; left: 20%">
+  </div>
+
+  <script>
+    const noButton = document.querySelector('.button.no');
+    const yesButton = document.querySelector('.button.yes');
+    const hearts = document.querySelector('.hearts');
+    const flowers = document.querySelector('.flowers');
+    const h1 = document.querySelector('h1');
+
+    let noClickCount = 0;
+
+    noButton.addEventListener('click', () => {
+      noClickCount++;
+      const messages = [
+        "Ti prego, non farlo, pensaci bene...",
+        "Mi fai piangere...",
+        "Non ci posso credere...",
+        "Non dirmi di no, ti supplico...",
+        "Per favore, pensaci ancora..."
+      ];
+      noButton.innerHTML = messages[noClickCount % messages.length];
+
+      // Cambia posizione
+      const randomX = Math.random() * (window.innerWidth - 200);
+      const randomY = Math.random() * (window.innerHeight - 100);
+      noButton.style.left = ${randomX}px;
+      noButton.style.top = ${randomY}px;
+
+      // Aumenta dimensione del SI
+      yesButton.style.transform = scale(${1 + noClickCount * 0.1});
+    });
+
+    yesButton.addEventListener('click', () => {
+      h1.innerHTML = "EVVAI AMORE MIO HAI CLICCATO SI :) AUGURI PER QUESTO NOSTRO PRIMO DI TANTISSIMI SAN VALENTINO CHE PASSEREMO ASSIEME";
+      hearts.classList.add('hidden');
+      flowers.classList.remove('hidden');
+      yesButton.style.backgroundColor = "#32CD32";
+      yesButton.style.fontSize = "50px";
+      yesButton.style.padding = "100px 200px";
+      yesButton.style.transition = "all 0.5s ease";
+    });
+  </script>
+
+</body>
+</html>
